@@ -1,4 +1,6 @@
 from typing import List, Tuple
+
+
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> Tuple[int, int]:
         m = {}
@@ -6,4 +8,3 @@ class Solution:
             if target - n in m:
                 return m[target - n], i
             m[n] = i
-
