@@ -9,40 +9,31 @@ class ListNode:
 
 
 class Solution:
-
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
 
-        if list1 is None:
-            return list2
+        if not list1 or not list2:
+            return list1 or list2
 
-        if list2 is None:
-            return list1
+        # make sure list1 is the base
+        if list2.val < list1.val:
+            list1, list2 = list2, list1
 
+        prev1 = ListNode(0, None)
         p1 = list1
-        prev1 = None
         p2 = list2
 
-        base = list1
-
-        while True:
-            if prev1 and not p1:
-                prev1.next = p2
-                break
-            if not p2:
-                break
-
-            if p2.val < p1.val:  # insert before p1
+        while p1 and p2:
+            if p2.val < p1.val:  # insert value from p2 right before p1
                 n = ListNode(p2.val, p1)
-                if prev1:
-                    prev1.next = n
-                else:
-                    base = n
-
+                prev1.next = n
                 prev1 = n
                 p1 = n.next
                 p2 = p2.next
-            else:
+            else:  # move list1 pointer forward
                 prev1 = p1
                 p1 = p1.next
 
-        return base
+        # put the rest of the remaining list on the end
+        prev1.next = p1 or p2
+
+        return list1
