@@ -22,7 +22,7 @@ class ListNode:
 def leq(l1, l2):
     """Lists are equal"""
     c1, c2 = l1, l2
-    while (c1 and c2):
+    while c1 and c2:
         if c1.val != c2.val:
             return False
         c1 = c1.next
@@ -34,7 +34,7 @@ def leq(l1, l2):
 
 def reverse_list(head):
     prev = None
-    while (head):
+    while head:
         nxt = head.next
         head.next = prev
         prev = head
